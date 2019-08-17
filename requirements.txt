@@ -1,0 +1,5 @@
+django
+djangorestframework
+django-generate-secret-key
+pyyaml
+gunicorn
