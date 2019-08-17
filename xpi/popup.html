@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <title>Add to Wishitch</title>
+        <style>
+            body {
+                padding: 20px;
+            }
+            #container {
+                width: 300px;
+            }
+            input {
+                float: left;
+                width: 295px;
+                margin: auto;
+                clear: both;
+            }
+            .preview-button {
+                float:left;
+                width: 25px;
+                height: 250px;
+                padding: 0;
+                vertical-align: middle;
+            }
+            #confirm {
+                width: 70px;
+                margin-left: 115px;
+            }
+            img{
+                float: left;
+                max-width: 250px;
+                height: 250px;
+            }
+            #next{
+                clear: right;
+            }
+            #error-zone{
+                width: 100%;
+                height: 20px;
+                color: red;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <form action="#">
+                <div id="preview_frame">
+                    <button id="prev" class="preview-button"><</button>
+                    <img id="gift-image" src="" width="250px"/>
+                    <button id="next" class="preview-button">></button>
+                </div>
+                <input id="gift-designation" type="text" placeholder="Designation"/>
+                <input id="gift-price" type="text" placeholder="price"/>
+                <input id="gift-url" type="text" placeholder="https://example.com"/>
+
+                <button type="submit">Confirm</button>
+            </form>
+            <span id="error-zone"></div>
+        </div>
+        <script src="wishitch.js"></script>
+    </body>
+</html>

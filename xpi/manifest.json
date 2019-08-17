@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "WishItch",
+  "version": "0.1",
+  "author": "Daniel Buteau",
+  "description": "Add the current page to your WishItch self-hosted server",
+  "homepage_url": "https://github.com/dbuteau/wishitch",
+  "icons": {
+    "24": "icons/gift-24.svg"
+  },
+  "incognito": "spanning",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+
+  "options_ui": {
+    "page": "settings/options.html",
+    "browser_style": true
+  },
+
+  "page_action": {
+      "show_matches": ["https://*/*"],
+      "browser_style": true,
+      "default_icon": {
+        "24": "icons/gift-24.svg"
+      },
+      "default_title": "Add to WishItch",
+      "default_popup": "popup.html"
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "wishitch@github"
+    }
+  }
+}
