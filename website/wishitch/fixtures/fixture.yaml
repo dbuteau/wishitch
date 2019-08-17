@@ -1,0 +1,6 @@
+- model: wishitch.Website
+  pk: 1
+  fields:
+    name: "Wishes than itch me"
+    theme: "default"
+    private: 0

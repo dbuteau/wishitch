@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+    <title>{{ Title }}</title>
+</head>
+<body>
+    <h1>{{ Title }}</h1>
+    
+    <nav>
+
+    </nav>
+
+    <main>
+        {% for wish in wishlist %}
+        <div onclick="{{wish.link}}">
+            <h2>{{wish.name}}</h2>
+            <span>Price: {{wish.price}}</span>
+            <img src="{{wish.img_link}}" alt="image of the {{wish.title}}"/>
+        </div>
+        {% endfor %}
+    </main>
+
+    <footer>
+        Powered with <a href="https://github.com/dbuteau/wishitch">WishItch</a>
+    </footer>
+</body>
+</html>
