@@ -3,4 +3,4 @@
   fields:
     name: "Wishes than itch me"
     theme: "default"
-    private: 0
+    private: False

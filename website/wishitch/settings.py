@@ -25,7 +25,7 @@ with open(os.path.join(BASE_DIR, 'secretkey.txt')) as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition
@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_generate_secret_key',
     'rest_framework',
     'rest_framework.authtoken',
     'wishitch',
-    'api',
 ]
 
 REST_FRAMEWORK = {
@@ -126,5 +126,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+def look_folder_tree(root):
+    result = ()
+    for dir_name, sub_dirs, file_names in os.walk(root):
+        for sub_dir_name in sub_dirs:
+            result += (os.path.join(dir_name, sub_dir_name),)
+    return result
 
-STATIC_URL = '/static/'
+# Django settings for project.
+
+PROJECT_DIR = os.path.dirname(__file__)
+
+STATIC_ROOT = '/static/'
+STATIC_URL  = '/static/'
+STATICFILES_DIRS = look_folder_tree(os.path.join(PROJECT_DIR,'templates'))
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
