@@ -1,26 +1,39 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <head>
     <title>{{ Title }}</title>
+    <link rel="stylesheet" href="{% static "index.css" %}">
 </head>
 <body>
-    <h1>{{ Title }}</h1>
-    
-    <nav>
+    <div id="page">
+        <h1>{{ Title }}</h1>
+        
+        <div id="flexible">
+            <nav>
+                <ul>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                </ul>
+            </nav>
 
-    </nav>
-
-    <main>
-        {% for wish in wishlist %}
-        <div onclick="{{wish.link}}">
-            <h2>{{wish.name}}</h2>
-            <span>Price: {{wish.price}}</span>
-            <img src="{{wish.img_link}}" alt="image of the {{wish.title}}"/>
+            <main>
+                {% for wish in wishlist %}
+                <article onclick="window.open('{{wish.link}}','_blank');">
+                    <h2>{{wish.name}}</h2>
+                    <span>Price: {{wish.price}}</span><br/>
+                    <img src="{{wish.img_link}}" alt="image of the {{wish.title}}"/>
+                </article>
+                {% endfor %}
+            </main>
         </div>
-        {% endfor %}
-    </main>
-
-    <footer>
-        Powered with <a href="https://github.com/dbuteau/wishitch">WishItch</a>
-    </footer>
+        <footer>
+            Powered by <a href="https://github.com/dbuteau/wishitch">WishItch</a>
+        </footer>
+    </div>
 </body>
 </html>

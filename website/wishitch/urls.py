@@ -17,13 +17,18 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.authtoken.views import obtain_auth_token
-from . import settings
-from . import views
+from rest_framework_swagger.views import get_swagger_view
+from .views import WebViews, ApiViews
+
+
+api_view = ApiViews.as_view({
+    'get': 'list',
+    'post' : 'create',
+})
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', WebViews.as_view(),name='index'),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/wish/$', views.CreateView.as_view(), name="create"),
-    url(r'^api/token/$', obtain_auth_token, name='api_token_auth'),
-    #url(r'^static/(?P.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT)}),)
+    url(r'^api/wishes/', api_view),
+    url(r'^api/docs/', get_swagger_view(title='WishItch API')),
 ]

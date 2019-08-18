@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_generate_secret_key',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_swagger',
     'wishitch',
 ]
 
