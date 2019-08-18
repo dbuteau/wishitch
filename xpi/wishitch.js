@@ -59,10 +59,10 @@ async function saveToServer(){
         const response = await fetch(server + '/api/wish', {
         method: 'POST',
         body: JSON.stringify({
-            name        = gift-designation, 
-            price       = gift-price, 
-            link        = gift-link, 
-            image_link  = gift-image
+            'name'        : gift-designation, 
+            'price'       : gift-price, 
+            'link'        : gift-link, 
+            'image_link'  : gift-image
         }),
         headers: {
             'Content-Type': 'application/json',
