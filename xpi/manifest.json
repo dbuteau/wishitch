@@ -10,6 +10,7 @@
   },
   "incognito": "spanning",
   "permissions": [
+    "<all_urls>",
     "activeTab",
     "storage"
   ],

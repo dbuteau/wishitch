@@ -4,8 +4,12 @@ var price  = 0
 var currentImage = 0
 var server
 var token
+
 let getting = browser.storage.sync.get();
-    getting.then(function(items){server = items.server;token = items.token;}, reportError);
+    getting.then(function(items){
+        server = items.server;
+        token  = items.token;
+    }, reportError);
 
 function prev_image(){
     if( currentImage > 0){
@@ -37,7 +41,7 @@ function fill_form(tabs) {
     var tabInfo = currentTab.get
 
     // fill forms with immediatly available content
-    document.getElementById("gift-designation").value = currentTab.title;
+    document.getElementById("gift-designation").value = currentTab.title.slice(0,70);
     document.getElementById("gift-url").value = currentTab.url;
 
     // fill form with active tab content: price
@@ -56,20 +60,27 @@ async function saveToServer(){
     if (!server || !token){
         reportError("Server is not defined in options, please setup the extension")
     }else{
-        const response = await fetch(server + '/api/wish', {
-        method: 'POST',
-        body: JSON.stringify({
-            'name'        : gift-designation, 
-            'price'       : gift-price, 
-            'link'        : gift-link, 
-            'image_link'  : gift-image
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-            'token': token
+        giftName  = document.getElementById("gift-designation").value.slice(0,70);
+        giftPrice = document.getElementById("gift-price").value;
+        giftUrl   = document.getElementById("gift-url").value;
+        giftImage = document.getElementById("gift-image").src;
+
+        fetch(server + '/api/wishes/', {
+            method: 'POST',
+            body: JSON.stringify({
+                'name'        : giftName,
+                'price'       : giftPrice,
+                'link'        : giftUrl, 
+                'img_link'  : giftImage
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'token': token
             }
-        });
-        const myJson = await response.json();
+        })
+        .then( response => response.json() )
+        .then( response => document.getElementById("error-zone").innerHTML = response.message )
+        .catch( error   => reportError(error) );
     }
 
 }
@@ -82,7 +93,7 @@ function sleep(milliseconds){
  * Just log the error to the console.
  */
 function reportError(error) {
-    console.error(`Could not wishitch: ${error}`);
+    console.error('Could not wishitch('+error.lineNumber+'): ' + error);
     document.getElementById("error-zone").innerHTML = error;
     sleep(5000).then( () => {
         document.getElementById("error-zone").innerHTML = "";
