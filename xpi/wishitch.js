@@ -110,4 +110,4 @@ browser.tabs.query({active: true, currentWindow: true})
 
 document.getElementById("prev").addEventListener("click", prev_image);
 document.getElementById("next").addEventListener("click", next_image);
-document.querySelector("form").addEventListener("submit", saveToServer);
+document.getElementById("confirm").addEventListener("click", saveToServer);

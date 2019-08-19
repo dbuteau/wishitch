@@ -42,25 +42,34 @@ article{
     display: block;
     float: left;
     width: 250px;
-    height: 300px;
     padding: 0px 10px 5px 10px;
     margin: 10px;
     cursor: pointer;
     border: 1px solid lightgray;
     background-color: white;
     border-radius: 10px;
+    height: 330px;
+}
+article > h2{
+    height: 35px;
 }
 article > h2, article > span{
     padding: 0px;
     margin:auto;
     max-width: 250px;
+    overflow: hidden;
+    font-size: 1em;
 }
 article > img{
     display: block;
     width: 250px;
     height: 250px;
     margin: auto;
-    background-color: black;
+    border: 1px solid lightgrey;
+
+}
+article > button{
+    margin-top: 5px;
 }
 footer{
     position: fixed;
