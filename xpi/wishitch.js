@@ -79,7 +79,7 @@ async function saveToServer(){
             }
         })
         .then( response => response.json() )
-        .then( response => document.getElementById("error-zone").innerHTML = response.message )
+        .then( response => reportError(response.message ))
         .catch( error   => reportError(error) );
     }
 
@@ -92,11 +92,14 @@ function sleep(milliseconds){
 /**
  * Just log the error to the console.
  */
-function reportError(error) {
-    console.error('Could not wishitch('+error.lineNumber+'): ' + error);
-    document.getElementById("error-zone").innerHTML = error;
+function reportError(error, type='error') {
+    if(type=='error'){
+        console.error('Could not wishitch('+error.lineNumber+'): ' + error);
+    }
+    var container = document.getElementById("error-zone")
+    container.insertAdjacentText("afterbegin", error);
     sleep(5000).then( () => {
-        document.getElementById("error-zone").innerHTML = "";
+        container.removeChild(container.firstChild);
     })
 }
 
