@@ -19,7 +19,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-with open(os.path.join(BASE_DIR, 'secretkey.txt')) as f:
+with open(os.path.join(BASE_DIR, 'datas/secretkey.txt')) as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'wishitch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'wishitch.db'),
+        'NAME': os.path.join(BASE_DIR, 'datas/wishitch.db'),
     }
 }
 

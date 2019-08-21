@@ -1,15 +1,40 @@
-version: '3'
+
+version: '3.6'
+
+# prepare named_volume for persistance, to not lose everything on exit/restart
+volumes:
+    data:
+      driver: local
+
 services:
   wishitch:
     image: "dbuteau/wishitch:latest"
     build:
-      context: ./
+        context: .
+    container_name: wishitch
+    restart: always
     ports:
-      - "8000:8000"
+        - "8000:8000"
     environment:
-      HOSTNAME: "['127.0.0.1','localhost']"
-      ADMIN_LOGIN: admin
-      ADMIN_EMAIL: admin@example.com
-      ADMIN_PASSWORD: admin
-    volumes:
-	- 
+      HOSTNAME: "'mes-souhaits.example.com'"
+      ADMIN_LOGIN: monLogin
+      ADMIN_EMAIL: mon@email.com
+      # Password loaded from .env in my case
+      ADMIN_PASSWORD: ${WISHITCH_PASSWORD}
+    volumes: # persist needed files
+        - data:/usr/src/app/wishitch/templates/
+        - data:/usr/src/app/datas/
+# OPTIONNAL ONLY FOR TRAEFIK
+    labels:
+        traefik.enable: 'true'
+        traefik.backend: wishitch
+        traefik.port: 8000
+        traefik.frontend.rule: "Host:mes-envies.buteau-06.fr"
+    networks:
+        - proxy
+
+networks: # bind to traefik network
+    proxy:
+        external:
+            name: proxy
+# -- END OF TRAEFIK CONFIG --
