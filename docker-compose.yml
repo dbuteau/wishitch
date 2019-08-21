@@ -29,7 +29,7 @@ services:
         traefik.enable: 'true'
         traefik.backend: wishitch
         traefik.port: 8000
-        traefik.frontend.rule: "Host:mes-envies.buteau-06.fr"
+        traefik.frontend.rule: "Host:mes-souhaits.example.com"
     networks:
         - proxy
 
