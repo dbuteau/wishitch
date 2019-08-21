@@ -3,8 +3,8 @@ from django.db import models
 class Wishlist(models.Model):
     name = models.CharField(max_length=70)
     price = models.FloatField()
-    link = models.URLField()
-    img_link = models.URLField()
+    link = models.URLField(max_length=250)
+    img_link = models.URLField(max_length=250)
     reserved = models.BooleanField(default=False)
     added_at = models.DateTimeField(auto_now_add=True)
 

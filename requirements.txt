@@ -3,5 +3,6 @@ djangorestframework
 django-rest-swagger
 django-generate-secret-key
 django-cors-headers
+whitenoise
 pyyaml
 gunicorn

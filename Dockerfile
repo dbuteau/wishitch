@@ -16,8 +16,8 @@ RUN python3 manage.py makemigrations wishitch
 RUN python3 manage.py migrate
 RUN python3 manage.py loaddata fixture.yaml
 
-COPY init.sh /init.sh
-RUN chmod +x /init.sh
+COPY init.sh ./init.sh
+RUN chmod +x ./init.sh
 
 
-ENTRYPOINT ["/init.sh"]
+ENTRYPOINT ["./init.sh"]

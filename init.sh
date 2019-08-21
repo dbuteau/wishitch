@@ -1,10 +1,10 @@
-#!/bin/bash
-
-set -e;set -x
+#!/bin/bash -e
 
 # check if it's the first time the docker is launched (db file is empty)
-if [ "$(cat datas/secretkey.txt)" == "empty"  ];then
+if [ "$(cat /usr/src/app/datas/secretkey.txt)" == "empty"  ];then
     python3 manage.py generate_secret_key --replace
+    cp -rf secretkey.txt datas/secretkey.txt && rm -f secretkey.txt
+    #check if command done its job
 
     if [ -z ${ADMIN_LOGIN+x} ] || [ -z ${ADMIN_EMAIL+x} ] || [ -z ${ADMIN_PASSWORD+x} ];then
         echo "ERROR You must give ADMIN_LOGIN, ADMIN_EMAIL and ADMIN_PASSWORD environnment variables"
