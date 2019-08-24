@@ -35,8 +35,8 @@
     },
     "scripts": {
         "test": "web-ext lint --source-dir ./xpi/; xo",
-        "build": "node_modules/.bin/gulp dist",
+        "build": "web-ext build ",
         "release:amo": "web-ext run --source-dir ./xpi/",
         "release": "npm run build && npm run release:amo"
-    },
+    }
 }
