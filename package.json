@@ -16,7 +16,7 @@
         "fancy-log": "*",
         "jshint": "*",
         "zip-dir": "*",
-        "webext": "*",
+        "web-ext": "*",
         "xo": "*"
     },
     "xo": {
@@ -34,9 +34,10 @@
         ]
     },
     "scripts": {
-        "test": "web-ext lint --source-dir ./xpi/ && xo",
-        "build": "web-ext build ",
-        "release:amo": "web-ext run --source-dir ./xpi/",
+        "test": "web-ext lint",
+        "build": "web-ext build",
+        "sign": "web-ext sign",
+        "release:amo": "web-ext run",
         "release": "npm run build && npm run release:amo"
     }
 }

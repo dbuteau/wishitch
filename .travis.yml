@@ -1,7 +1,6 @@
 env:
   - EXTENSION_ID=wishitch@dbuteau.github.com  
-  - WEB_EXT_API_KEY=$WEB_EXT_API_KEY
-  - WEB_EXT_API_SECRET=$WEB_EXT_API_SECRET
+  
   - WEB_EXT_SOURCE_DIR=./xpi/
 
 sudo: false
@@ -32,7 +31,10 @@ jobs:
         - 'node'
       api_key: $GH_TOKEN
       WEB_EXT_CHANNEL: unlisted
+      WEB_EXT_API_KEY: $WEB_EXT_API_KEY
+      WEB_EXT_API_SECRET: $WEB_EXT_API_SECRET
       before_deploy:
+        - npm run build
         - npm run sign
       provider: releases
       skip_cleanup: true
@@ -47,6 +49,9 @@ jobs:
       name: release on AMO
       node_js:
         - 'node'
+      WEB_EXT_CHANNEL: listed
+      WEB_EXT_API_KEY: $WEB_EXT_API_KEY
+      WEB_EXT_API_SECRET: $WEB_EXT_API_SECRET  
       provider: script
       skip_cleanup: true
       script: "npm run release"
