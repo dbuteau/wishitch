@@ -1,10 +1,10 @@
 {
     "name": "wishitch",
-    "version": "1.5.0",
+    "version": "0.1.0",
     "description": "Add current tab to your self-hosted wishitch server",
     "homepage": "https://github.com/dbuteau/wishitch",
     "author": "Daniel Buteau",
-    "license": "GPLv3",
+    "license": "GPL-3.0-only",
     "repository": {
       "type": "git",
       "url": "https://github.com/dbuteau/wishitch.git"
@@ -16,8 +16,7 @@
         "fancy-log": "*",
         "jshint": "*",
         "zip-dir": "*",
-        "web-ext": "*",
-        "xo": "*"
+        "web-ext": "*"
     },
     "xo": {
         "space": true,

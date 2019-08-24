@@ -16,23 +16,18 @@ jobs:
     - stage: test
       name: lint
       node_js:
-        - 'node'
+        - '10'
+      before_script:
+        - unset WEB_EXT_API_KEY
+        - unset WEB_EXT_API_SECRET
       script: npm run test
-
-    - stage: test
-      name: functional
-      node_js:
-        - 'node'
-      script: npm run func
 
     - stage: deploy
       name: create release file on github
       node_js:
-        - 'node'
+        - '10'
       api_key: $GH_TOKEN
       WEB_EXT_CHANNEL: unlisted
-      WEB_EXT_API_KEY: $WEB_EXT_API_KEY
-      WEB_EXT_API_SECRET: $WEB_EXT_API_SECRET
       before_deploy:
         - npm run build
         - npm run sign
@@ -48,10 +43,8 @@ jobs:
     - stage: deploy
       name: release on AMO
       node_js:
-        - 'node'
+        - '10'
       WEB_EXT_CHANNEL: listed
-      WEB_EXT_API_KEY: $WEB_EXT_API_KEY
-      WEB_EXT_API_SECRET: $WEB_EXT_API_SECRET  
       provider: script
       skip_cleanup: true
       script: "npm run release"
