@@ -16,32 +16,38 @@ stages:
 jobs:
   include:
     - stage: test
-      name: lint     
+      name: lint xpi
       before_script:
         - unset WEB_EXT_API_KEY
         - unset WEB_EXT_API_SECRET
       script: npm run test
 
     - stage: deploy
-      name: create release file on github
+      name: release-xpi on github
       provider: releases
-      WEB_EXT_CHANNEL: unlisted
       before_script:
-        - web-ext sign
+        - CHANGED_FILES=`git diff --name-only master ${TRAVIS_COMMIT}`
+        - if echo ${CHANGED_FILES} | grep -v -e "xpi\/"; then travis_terminate 0; fi
+        - 'sed -i s/"version": "(.*)",/"version": "\1-$TRAVIS_BUILD_NUMBER-beta",/ ./xpi/manifest.json'
+        - web-ext sign --channel=unlisted -a build/
       api_key: $GH_TOKEN
       skip_cleanup: true
       overwrite: true
       file_glob: true
-      file: "*.xpi"
+      file: "build/*.xpi"
       draft: true
       on:
         branch: master
 
     - stage: deploy
-      name: release on AMO
-      WEB_EXT_CHANNEL: listed
+      name: release-xpi on AMO
       provider: script
       skip_cleanup: true
-      script: "web-ext sign"
-      on.tags: true
+      draft: false
+      script: 
+        - CHANGED_FILES=`git diff --name-only master ${TRAVIS_COMMIT}`
+        - if echo ${CHANGED_FILES} | grep -v -e "xpi\/"; then travis_terminate 0; fi
+        - 'sed -i s/"version": "(.*)",/"version": "$TRAVIS_TAG",/ ./xpi/manifest.json'
+        - web-ext sign --channel=listed
+      if: tag IS present
 
