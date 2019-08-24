@@ -1,13 +1,13 @@
-sudo: false
-language: node_js
-node_js:
-  - 'node'
-env:
-  - EXTENSION_ID=wishitch@dbuteau.github.com
-  - WEB_EXT_CHANNEL=unlisted
-  - WEB_EXT_API_KEY=$WEB_EXT_API_KEY
-  - WEB_EXT_API_SECRET=$WEB_EXT_API_SECRET
 deploy:
+  sudo: false
+  language: node_js
+  node_js:
+  - 'node'
+  env:
+    - EXTENSION_ID=wishitch@dbuteau.github.com
+    - WEB_EXT_CHANNEL=unlisted
+    - WEB_EXT_API_KEY=$WEB_EXT_API_KEY
+    - WEB_EXT_API_SECRET=$WEB_EXT_API_SECRET
   - provider: script
     skip_cleanup: true
     script: npm run release
