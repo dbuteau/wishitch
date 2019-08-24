@@ -1,0 +1,24 @@
+sudo: false
+language: node_js
+node_js:
+  - 'node'
+env:
+  - EXTENSION_ID=wishitch@dbuteau.github.com
+  - WEB_EXT_CHANNEL=unlisted
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: npm run release
+    on:
+      branch: master
+      tags: true
+  - provider: releases
+    api_key: 
+      secret: $GH_TOKEN
+    skip_cleanup: true
+    overwrite: true
+    file_glob: true
+    file: "dist/*"
+    on:
+      branch: master
+      tags: true

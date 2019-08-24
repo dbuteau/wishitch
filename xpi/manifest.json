@@ -5,6 +5,11 @@
   "author": "Daniel Buteau",
   "description": "Add the current page to your WishItch self-hosted server",
   "homepage_url": "https://github.com/dbuteau/wishitch",
+  "applications": {
+    "gecko": {
+      "id": "wishitch@dbuteau.github.com"
+    }
+  },
   "icons": {
     "24": "icons/gift-24.svg"
   },
@@ -28,11 +33,5 @@
       },
       "default_title": "Add to WishItch",
       "default_popup": "popup.html"
-  },
-
-  "applications": {
-    "gecko": {
-      "id": "wishitch@dbuteau.github.com"
-    }
   }
 }

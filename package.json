@@ -1,0 +1,42 @@
+{
+    "name": "wishitch",
+    "version": "1.5.0",
+    "description": "Add current tab to your self-hosted wishitch server",
+    "homepage": "https://github.com/dbuteau/wishitch",
+    "author": "Daniel Buteau",
+    "license": "GPLv3",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/dbuteau/wishitch.git"
+    },
+    "bugs": {
+      "url": "https://github.com/dbuteau/wishitch/issues"
+    },
+    "devDependencies": {
+        "fancy-log": "^1.3.2",
+        "jshint": "^2.9.6",
+        "zip-dir": "^1.0.1",
+        "webext": "^1.9.1-with-submit.1",
+        "xo": "^0.21.1"
+    },
+    "xo": {
+        "space": true,
+        "envs": [
+          "browser",
+          "webextensions"
+        ],
+        "rules": {
+          "import/no-unassigned-import": 0,
+          "no-lonely-if": "off"
+        },
+        "ignores": [
+          "build/**"
+        ]
+    },
+    "scripts": {
+        "test": "web-ext lint --source-dir ./xpi/; xo",
+        "build": "node_modules/.bin/gulp dist",
+        "release:amo": "web-ext run --source-dir ./xpi/",
+        "release": "npm run build && npm run release:amo"
+    },
+}
