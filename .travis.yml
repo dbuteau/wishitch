@@ -25,7 +25,11 @@ jobs:
     - stage: deploy
       name: create release file on github
       provider: releases
-      before_deploy:
+      before_script:
+        - APIKEY="$WEB_EXT_API_KEY"
+        - APISECRET="$WEB_EXT_API_SECRET"
+        - unset WEB_EXT_API_KEY
+        - unset WEB_EXT_API_SECRET
         - npm run release
       node_js:
         - '10'
@@ -44,6 +48,11 @@ jobs:
       node_js:
         - '10'
       WEB_EXT_CHANNEL: listed
+      before_script:
+        - APIKEY="$WEB_EXT_API_KEY"
+        - APISECRET="$WEB_EXT_API_SECRET"
+        - unset WEB_EXT_API_KEY
+        - unset WEB_EXT_API_SECRET
       provider: script
       skip_cleanup: true
       script: "npm run release:amo"
