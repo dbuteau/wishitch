@@ -5,6 +5,8 @@ env:
 
 sudo: false
 language: node_js
+node_js:
+  - node
 
 stages:
   - test
@@ -14,9 +16,7 @@ stages:
 jobs:
   include:
     - stage: test
-      name: lint
-      node_js:
-        - '10'
+      name: lint     
       before_script:
         - unset WEB_EXT_API_KEY
         - unset WEB_EXT_API_SECRET
