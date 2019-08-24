@@ -1,13 +1,11 @@
-sudo: false
-language: node_js
-node_js:
-  - 'node'
 env:
   - EXTENSION_ID=wishitch@dbuteau.github.com  
   - WEB_EXT_API_KEY=$WEB_EXT_API_KEY
   - WEB_EXT_API_SECRET=$WEB_EXT_API_SECRET
   - WEB_EXT_SOURCE_DIR=./xpi/
 
+sudo: false
+language: node_js
 
 stages:
   - test
@@ -18,14 +16,20 @@ jobs:
   include:
     - stage: test
       name: lint
+      node_js:
+        - 'node'
       script: npm run test
 
     - stage: test
       name: functional
+      node_js:
+        - 'node'
       script: npm run func
 
     - stage: deploy
       name: create release file on github
+      node_js:
+        - 'node'
       api_key: $GH_TOKEN
       WEB_EXT_CHANNEL: unlisted
       before_deploy:
@@ -41,6 +45,8 @@ jobs:
 
     - stage: deploy
       name: release on AMO
+      node_js:
+        - 'node'
       provider: script
       skip_cleanup: true
       script: "npm run release"
