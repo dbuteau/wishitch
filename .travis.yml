@@ -25,16 +25,10 @@ jobs:
     - stage: deploy
       name: create release file on github
       provider: releases
-      before_script:
-        - APIKEY="$WEB_EXT_API_KEY"
-        - APISECRET="$WEB_EXT_API_SECRET"
-        - unset WEB_EXT_API_KEY
-        - unset WEB_EXT_API_SECRET
-        - npm run release
-      node_js:
-        - '10'
-      api_key: $GH_TOKEN
       WEB_EXT_CHANNEL: unlisted
+      before_script:
+        - web-ext sign
+      api_key: $GH_TOKEN
       skip_cleanup: true
       overwrite: true
       file_glob: true
@@ -45,16 +39,9 @@ jobs:
 
     - stage: deploy
       name: release on AMO
-      node_js:
-        - '10'
       WEB_EXT_CHANNEL: listed
-      before_script:
-        - APIKEY="$WEB_EXT_API_KEY"
-        - APISECRET="$WEB_EXT_API_SECRET"
-        - unset WEB_EXT_API_KEY
-        - unset WEB_EXT_API_SECRET
       provider: script
       skip_cleanup: true
-      script: "npm run release:amo"
+      script: "web-ext sign"
       on.tags: true
 

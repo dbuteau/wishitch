@@ -21,8 +21,6 @@
     "scripts": {
         "test": "web-ext lint",
         "build": "web-ext build",
-        "sign": "web-ext sign --api-key=$APIKEY --api-secret=$APISECRET",
-        "release:amo": "npm run build && web-ext run",
-        "release": "npm run sign"
+        "release": "web-ext sign --api-key=$APIKEY --api-secret=$APISECRET"
     }
 }
