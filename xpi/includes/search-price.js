@@ -19,7 +19,7 @@ function filter_dataAttributes(attribute){
 }
 
 function search_price(){
-    var dataAttributes = ["data-price","data-value"];
+    var dataAttributes = ["data-price","data-value","data-prix-origine"];
     var currency = document.querySelectorAll('[data-currency]');
     var price;
     if (!currency) {
