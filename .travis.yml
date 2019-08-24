@@ -1,25 +1,49 @@
-deploy:
-  sudo: false
-  language: node_js
-  node_js:
+sudo: false
+language: node_js
+node_js:
   - 'node'
-  env:
-    - EXTENSION_ID=wishitch@dbuteau.github.com
-    - WEB_EXT_CHANNEL=unlisted
-    - WEB_EXT_API_KEY=$WEB_EXT_API_KEY
-    - WEB_EXT_API_SECRET=$WEB_EXT_API_SECRET
-  - provider: script
-    skip_cleanup: true
-    script: npm run release
-    on:
-      branch: master
-      tags: true
-  - provider: releases
-    api_key: $GH_TOKEN
-    skip_cleanup: true
-    overwrite: true
-    file_glob: true
-    file: "dist/*"
-    on:
-      branch: master
-      tags: true
+env:
+  - EXTENSION_ID=wishitch@dbuteau.github.com  
+  - WEB_EXT_API_KEY=$WEB_EXT_API_KEY
+  - WEB_EXT_API_SECRET=$WEB_EXT_API_SECRET
+  - WEB_EXT_SOURCE_DIR=./xpi/
+
+
+stages:
+  - test
+  - name: deploy
+    if: branch = master
+
+jobs:
+  include:
+    - stage: test
+      name: lint
+      script: npm run test
+
+    - stage: test
+      name: functional
+      script: npm run func
+
+    - stage: deploy
+      name: create release file on github
+      api_key: $GH_TOKEN
+      WEB_EXT_CHANNEL: unlisted
+      before_deploy:
+        - npm run sign
+      provider: releases
+      skip_cleanup: true
+      overwrite: true
+      file_glob: true
+      file: "*.xpi"
+      draft: true
+      on:
+        branch: master
+
+    - stage: deploy
+      name: release on AMO
+      provider: script
+      skip_cleanup: true
+      script: "npm run release"
+      on:
+        tags: true
+
