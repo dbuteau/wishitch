@@ -5,6 +5,8 @@ node_js:
 env:
   - EXTENSION_ID=wishitch@dbuteau.github.com
   - WEB_EXT_CHANNEL=unlisted
+  - WEB_EXT_API_KEY=$WEB_EXT_API_KEY
+  - WEB_EXT_API_SECRET=$WEB_EXT_API_SECRET
 deploy:
   - provider: script
     skip_cleanup: true
@@ -13,8 +15,7 @@ deploy:
       branch: master
       tags: true
   - provider: releases
-    api_key: 
-      secret: $GH_TOKEN
+    api_key: $GH_TOKEN
     skip_cleanup: true
     overwrite: true
     file_glob: true
