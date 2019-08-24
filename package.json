@@ -34,7 +34,7 @@
         ]
     },
     "scripts": {
-        "test": "web-ext lint --source-dir ./xpi/; xo",
+        "test": "web-ext lint --source-dir ./xpi/ && xo",
         "build": "web-ext build ",
         "release:amo": "web-ext run --source-dir ./xpi/",
         "release": "npm run build && npm run release:amo"
