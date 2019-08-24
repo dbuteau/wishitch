@@ -18,25 +18,11 @@
         "zip-dir": "*",
         "web-ext": "*"
     },
-    "xo": {
-        "space": true,
-        "envs": [
-          "browser",
-          "webextensions"
-        ],
-        "rules": {
-          "import/no-unassigned-import": 0,
-          "no-lonely-if": "off"
-        },
-        "ignores": [
-          "build/**"
-        ]
-    },
     "scripts": {
         "test": "web-ext lint",
         "build": "web-ext build",
         "sign": "web-ext sign",
-        "release:amo": "web-ext run",
-        "release": "npm run build && npm run release:amo"
+        "release:amo": "npm run build && web-ext run",
+        "release": "npm run build && npm run sign"
     }
 }

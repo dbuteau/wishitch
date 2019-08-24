@@ -24,14 +24,13 @@ jobs:
 
     - stage: deploy
       name: create release file on github
+      provider: releases
+      before_deploy:
+        - npm run release
       node_js:
         - '10'
       api_key: $GH_TOKEN
       WEB_EXT_CHANNEL: unlisted
-      before_deploy:
-        - npm run build
-        - npm run sign
-      provider: releases
       skip_cleanup: true
       overwrite: true
       file_glob: true
@@ -47,7 +46,6 @@ jobs:
       WEB_EXT_CHANNEL: listed
       provider: script
       skip_cleanup: true
-      script: "npm run release"
-      on:
-        tags: true
+      script: "npm run release:amo"
+      on.tags: true
 
