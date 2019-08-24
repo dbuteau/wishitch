@@ -1,7 +1,7 @@
 env:
-  - EXTENSION_ID=wishitch@dbuteau.github.com  
-  
-  - WEB_EXT_SOURCE_DIR=./xpi/
+  global:
+    - EXTENSION_ID=wishitch@dbuteau.github.com  
+    - WEB_EXT_SOURCE_DIR=./xpi/
 
 sudo: false
 language: node_js
